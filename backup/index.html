@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tarık Taşdemir | Avukat — Çok Yakında</title>
+    <meta name="description" content="Tarık Taşdemir Avukatlık Bürosu — Çok Yakında." />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:title" content="Tarık Taşdemir | Avukat — Çok Yakında" />
+    <meta property="og:description" content="Yeni web sitemiz hazırlanıyor." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="logo-avukat.png" />
+    <meta name="theme-color" content="#c9a052" />
+    <link rel="icon" type="image/png" href="logo-avukat.png" />
+    <link rel="apple-touch-icon" href="logo-avukat.png" />
+    <style>
+        :root {
+            --gold: #c9a052;
+            --gold-soft: #e0c791;
+            --bg: #0f0f10;
+            --text: #eee9dd;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: "Times New Roman", Georgia, "Noto Serif", serif;
+            color: var(--text);
+            background:
+                radial-gradient(1100px 1100px at 10% -10%, #1b1b1d 0%, transparent 60%),
+                radial-gradient(900px 900px at 110% 110%, #1b1b1d 0%, transparent 60%),
+                repeating-linear-gradient(60deg, rgba(255, 255, 255, .02) 0 2px, transparent 2px 12px),
+                repeating-linear-gradient(-60deg, rgba(255, 255, 255, .015) 0 2px, transparent 2px 12px),
+                var(--bg);
+        }
+
+        .wrap {
+            min-height: 100%;
+            display: grid;
+            place-items: center;
+            padding: 40px 20px;
+        }
+
+        .card {
+            width: min(820px, 94vw);
+            text-align: center;
+        }
+
+        .logo-ring {
+            display: inline-grid;
+            place-items: center;
+            width: min(360px, 70vw);
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            position: relative;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, .03) inset,
+                0 18px 40px rgba(0, 0, 0, .6),
+                0 2px 0 rgba(255, 255, 255, .06) inset;
+            margin-inline: auto;
+        }
+
+        .logo {
+            width: 86%;
+            height: 86%;
+            object-fit: contain;
+            border-radius: 50%;
+            filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .55));
+        }
+
+        h1 {
+            margin: 28px 0 8px;
+            font-size: clamp(26px, 4.6vw, 44px);
+            letter-spacing: .6px;
+            color: var(--gold);
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .06),
+                0 3px 10px rgba(0, 0, 0, .45),
+                0 0 24px rgba(201, 160, 82, .28);
+        }
+
+        .subtitle {
+            margin: 0 0 18px;
+            font-size: clamp(16px, 2.8vw, 22px);
+            color: var(--gold-soft);
+            letter-spacing: .3px;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 1px solid rgba(201, 160, 82, .35);
+            border-radius: 999px;
+            color: #d8d1c3;
+            text-decoration: none;
+            transition: .25s ease;
+            margin: 6px;
+            backdrop-filter: saturate(140%) blur(2px);
+        }
+
+        .pill img {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+        }
+
+        .pill:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+            color: #fff
+        }
+
+        footer {
+            margin-top: 28px;
+            font-size: 14px;
+            color: #a9a198;
+            opacity: .9;
+        }
+
+        @media (max-width:420px) {
+            .pill {
+                display: block;
+                justify-content: center
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrap">
+        <section class="card" aria-label="Karşılama">
+            <div class="logo-ring" aria-hidden="true">
+                <img class="logo" src="logo-avukat.png" alt="Tarık Taşdemir — Logo" />
+            </div>
+
+            <p style="max-width:62ch;margin:0 auto 18px;line-height:1.6">
+                Yeni web sitemiz <strong>çok yakında</strong> yayında olacak.
+                Bu süre zarfında bize aşağıdaki kanallardan ulaşabilirsiniz.
+            </p>
+
+            <div>
+                <a class="pill" href="mailto:info@avukattariktasdemir.com" title="E-posta">
+                    <img src="logo-avukat.png" alt="logo"> info@avukattariktasdemir.com
+                </a>
+                <a class="pill" href="https://maps.app.goo.gl/QWjBTYNVUWG2s6Xz9" target="_blank" rel="noopener"
+                    title="Haritada Gör">
+                    <img src="logo-avukat.png" alt="logo"> Haritada Gör
+                </a>
+                <a class="pill" href="https://www.instagram.com/avtariktasdemir/" target="_blank" rel="noopener"
+                    title="Instagram">
+                    <img src="logo-avukat.png" alt="logo"> Instagram / @avtariktasdemir
+                </a>
+            </div>
+
+            <footer>
+                © <span id="yil"></span> Tarık Taşdemir. Tüm hakları saklıdır.
+            </footer>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('yil').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

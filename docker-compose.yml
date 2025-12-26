@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: avukat_app
+    volumes:
+      - .:/var/www
+    networks:
+      - avukat_network
+    depends_on:
+      - mysql
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: avukat_nginx
+    ports:
+      - "8085:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - .:/var/www
+    networks:
+      - avukat_network
+    depends_on:
+      - app
+
+  mysql:
+    image: mysql:8.0
+    container_name: avukat_mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: avukat
+      MYSQL_PASSWORD: password
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - avukat_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: avukat_phpmyadmin
+    ports:
+      - "8086:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+      PHP_UPLOAD_LIMIT: 300M
+      PHP_MEMORY_LIMIT: 512M
+    depends_on:
+      - mysql
+    networks:
+      - avukat_network
+
+networks:
+  avukat_network:
+
+
+volumes:
+  dbdata:
