@@ -27,12 +27,16 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'image' => 'nullable|image',
+            'title_en' => 'nullable|string',
+            'content_en' => 'nullable|string',
         ]);
 
         $post = new Post();
         $post->title = $request->title;
         $post->slug = Str::slug($request->title);
         $post->content = $request->content;
+        $post->title_en = $request->title_en;
+        $post->content_en = $request->content_en;
         $post->is_published = $request->has('is_published');
         $post->published_at = $request->has('is_published') ? now() : null;
 
@@ -56,11 +60,15 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'image' => 'nullable|image',
+            'title_en' => 'nullable|string',
+            'content_en' => 'nullable|string',
         ]);
 
         $post->title = $request->title;
         $post->slug = Str::slug($request->title);
         $post->content = $request->content;
+        $post->title_en = $request->title_en;
+        $post->content_en = $request->content_en;
         $post->is_published = $request->has('is_published');
         
         if ($post->is_published && !$post->published_at) {

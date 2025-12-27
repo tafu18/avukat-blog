@@ -7,6 +7,9 @@ Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('h
 Route::view('/hakkimda', 'pages.about')->name('about');
 Route::view('/iletisim', 'pages.contact')->name('contact');
 Route::post('/iletisim', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
+Route::get('/yazilar', [\App\Http\Controllers\PostController::class, 'blog'])->name('blog.index');
+Route::get('/calisma-alanlarimiz', [\App\Http\Controllers\PracticeController::class, 'index'])->name('practices.index');
+Route::get('/calisma-alanlarimiz/{slug}', [\App\Http\Controllers\PracticeController::class, 'show'])->name('practices.show');
 Route::get('/posts/{slug}', [\App\Http\Controllers\PostController::class, 'show'])->name('posts.show');
 Route::post('/posts/{post}/comments', [\App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 
@@ -21,15 +24,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        $stats = [
-            'posts' => \App\Models\Post::count(),
-            'comments' => \App\Models\Comment::count(),
-            'pending_comments' => \App\Models\Comment::where('is_approved', false)->count(),
-            'views' => \App\Models\Post::sum('views'),
-        ];
-        return view('admin.dashboard', compact('stats'));
-    })->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('posts', \App\Http\Controllers\Admin\PostController::class);
     

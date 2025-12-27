@@ -8,12 +8,18 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = \App\Models\Post::where('is_published', true)->orderBy('published_at', 'desc')->paginate(10);
+        $posts = \App\Models\Post::where('is_published', true)->orderBy('published_at', 'desc')->paginate(6);
         $mostRead = \App\Models\Post::where('is_published', true)->orderBy('views', 'desc')->take(5)->get();
         // For slider: Top 10 most read (simulating "Today's Top" with all time popular for now)
         $sliderPosts = \App\Models\Post::where('is_published', true)->orderBy('views', 'desc')->take(10)->get();
         
         return view('welcome', compact('posts', 'mostRead', 'sliderPosts'));
+    }
+
+    public function blog()
+    {
+        $posts = \App\Models\Post::where('is_published', true)->orderBy('published_at', 'desc')->paginate(12);
+        return view('posts.index', compact('posts'));
     }
 
     public function show($slug)
