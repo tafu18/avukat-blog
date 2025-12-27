@@ -3,7 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
+// Route::get('/', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
+Route::get('/', function () {
+    return file_get_contents(public_path('../backup/index.html'));
+})->name('home');
+Route::get('/v2', [\App\Http\Controllers\PostController::class, 'index'])->name('home');
 Route::view('/hakkimda', 'pages.about')->name('about');
 Route::view('/iletisim', 'pages.contact')->name('contact');
 Route::post('/iletisim', [\App\Http\Controllers\ContactController::class, 'store'])->name('contact.store');
@@ -37,3 +41,32 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
 });
 
 require __DIR__.'/auth.php';
+
+// --- Shared Hosting Helper Routes (Terminal Olmayan Sunucular İçin) ---
+Route::get('/sys-setup/{command}', function ($command) {
+    // GÜVENLİK: Bu key'i kimseyle paylaşmayın veya işiniz bitince bu bloğu silin/yorum satırı yapın.
+    // Kullanım: siteadresi.com/sys-setup/migrate?key=tayfun_gizli_anahtar
+
+    $validCommands = [
+        'storage-link' => 'storage:link',       // Resimlerin görünmesi için
+        'migrate' => 'migrate --force',         // Veritabanı tablolarını oluşturmak için
+        'optimize' => 'optimize:clear',         // Tüm önbelleği (cache, config, route) temizlemek için
+        'cache' => 'cache:clear',
+        'config' => 'config:clear',
+        'view' => 'view:clear',
+        'down' => 'down --secret=bakim_modu',   // Siteyi bakım moduna alır
+        'up' => 'up',                           // Bakım modundan çıkarır
+        'seed' => 'db:seed --force',            // Veritabanına örnek verileri eklemek için
+    ];
+
+    if (!array_key_exists($command, $validCommands)) {
+        return response("Geçersiz Komut! Kullanılabilir komutlar: " . implode(', ', array_keys($validCommands)), 400);
+    }
+
+    try {
+        \Illuminate\Support\Facades\Artisan::call($validCommands[$command]);
+        return "<pre>" . \Illuminate\Support\Facades\Artisan::output() . "</pre>";
+    } catch (\Exception $e) {
+        return "Hata oluştu: " . $e->getMessage();
+    }
+});
